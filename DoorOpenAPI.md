@@ -25,11 +25,14 @@ Path: `/gws/apigateway/api/9369beb5578108ad97c4d09cad46e060550480ae9c171369fa749
 
 Requests are HTTP POST Operations using JSON as Payload.  
 
-Sample Data Structure:<pre>
-{"userid":"`youruserid`",
-"ticketid":"`yourticketid`",
-"authenticationToken":"`yourauthenticationtoken`"
-}</pre>
+Sample Data Structure:
+```
+{
+"userid":"youruserid",
+"ticketid":"yourticketid",
+"authenticationToken":"yourauthenticationtoken"
+}
+```
 
 Information about each of the required data fields is provided here:
 
