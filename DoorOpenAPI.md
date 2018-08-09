@@ -23,8 +23,11 @@ Host:  `https://service.us.apiconnect.ibmcloud.com`
 
 Path: `/gws/apigateway/api/9369beb5578108ad97c4d09cad46e060550480ae9c171369fa74976955506891/kiMVlm/doorOverideRequest`
 
-Required Headers: `Content-Type`:`application/json`
+Required Headers:
+`Content-Type`:`application/json`
+
 `Accept`:`application-json`
+
 `X-IBM-Client-Id`:Your API Key (not AuthToken or Ticket Id). 
 
 Requests are HTTP POST Operations using JSON as Payload.  
