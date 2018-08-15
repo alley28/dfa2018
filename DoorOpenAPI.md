@@ -43,7 +43,7 @@ Sample Data Structure:
 
 Information about each of the required data fields is provided here:
 
-	* userid --- This field is the internal user name provided in the global user database
+	* userid --- This field is the internal user name provided in the global user database.  **NOTE** The field is called CCYID. It is kept in the main user table (DFAUSER).
 
 	* ticketid --- Each request needs to have a ticket id attached to it.  It is how the system tracks all requests.  When you acquire an authenticationToken, a Ticket ID will be provided for you.  It will be provided with you when you get your authentication token
 	
