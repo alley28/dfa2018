@@ -32,12 +32,20 @@ Required Headers:
 
 Requests are HTTP POST Operations using JSON as Payload.  
 
-Sample Data Structure:
+Sample Request Data Structure:
 ```
 {
 "userid":"youruserid",
 "ticketid":"yourticketid",
 "authenticationToken":"yourauthenticationtoken"
+}
+```
+
+Sample Response Data Structure
+```
+{
+"returncode": "API Return Code",
+"returnmessage": "Response Message from the API"
 }
 ```
 
