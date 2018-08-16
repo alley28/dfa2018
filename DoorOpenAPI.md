@@ -26,9 +26,13 @@ Path: `/gws/apigateway/api/9369beb5578108ad97c4d09cad46e060550480ae9c171369fa749
 Required Headers:
 `Content-Type`:`application/json`
 
-`Accept`:`application-json`
+`Accept`:`application/json`
 
 `X-IBM-Client-Id`:Your API Key (not AuthToken or Ticket Id). 
+
+Optional Header:
+
+`X-Debug-Mode`: True  (This provides debug information for the API call should it fail)
 
 Requests are HTTP POST Operations using JSON as Payload.  
 

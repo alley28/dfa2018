@@ -27,9 +27,13 @@ Required Headers:
 
 `Content-Type`:`application/json`
 
-`Accept`:`application-json`
+`Accept`:`application/json`
 
 `X-IBM-Client-Id`:Your API Key (not AuthToken or Ticket Id). 
+
+Optional Header:
+
+`X-Debug-Mode`: True  (This provides debug information for the API call should it fail)
 
 Requests are HTTP POST Operations using JSON as Payload.  
 
