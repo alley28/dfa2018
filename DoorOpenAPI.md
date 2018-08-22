@@ -21,7 +21,7 @@ The API Is provided as a REST API at this location:
 
 Host:  `https://service.us.apiconnect.ibmcloud.com`
 
-Path: `/gws/apigateway/api/9369beb5578108ad97c4d09cad46e060550480ae9c171369fa74976955506891/kiMVlm/doorOverideRequest`
+Path: `/gws/apigateway/api/9369beb5578108ad97c4d09cad46e060550480ae9c171369fa74976955506891/kiMVlm/doorOverideRequest/createNew`
 
 Required Headers:
 `Content-Type`:`application/json`
@@ -39,18 +39,17 @@ Requests are HTTP POST Operations using JSON as Payload.
 Sample Request Data Structure:
 ```
 {
-"userid":"youruserid",
-"ticketid":"yourticketid",
-"authenticationToken":"yourauthenticationtoken"
+  "request": {
+    "userid": "someid",
+    "authenticationToken": "sometoken",
+    "ticketid": "someticket"
+  }
 }
 ```
 
 Sample Response Data Structure
 ```
-{
-"returncode": "API Return Code",
-"returnmessage": "Response Message from the API"
-}
+{"status":{"message":"somemessage","name":"messageType","statusCode":"200"}}
 ```
 
 Information about each of the required data fields is provided here:
