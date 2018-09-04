@@ -19,6 +19,8 @@ This document will provide the basic information on how to execute manual door o
 
 The API Is provided as a REST API at this location:
 
+Method Supported:  `POST`
+
 Host:  `https://service.us.apiconnect.ibmcloud.com`
 
 Path: `/gws/apigateway/api/9369beb5578108ad97c4d09cad46e060550480ae9c171369fa74976955506891/kiMVlm/doorOverideRequest/createNew`
