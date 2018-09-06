@@ -37,7 +37,7 @@ The password resides in a Cloudant NoSQL Database on IBM Cloud. You will use App
 17. Under the `If no items are found` section. Select the `Continue the flow and issue a 204: no content status code` options.
 18. Immediately to the right of the IBM Cloudant operation, click on the `+` icon and add a `JSON Parser` operation. You can find this operation under the `Toolbox` heading. We will use this operation to parse the JSON object stored in the Cloudant Database.
 19. Select the `JSON Input` to parse by clicking on the text box and clicking the "hamburger" icon. From the `Available Inputs`, select the `IBM Cloudant/Retrieve documents` dropdown and select the `Document Data` object.
-20. Under the `Output Schema` section. Enter in the following sample JSON snippet:
+20. Click the twisty arrow to reveal the `Output Schema` section.   Enter in the following sample JSON snippet:
 ```
 {
  "password": "somepassword"
@@ -47,7 +47,7 @@ The password resides in a Cloudant NoSQL Database on IBM Cloud. You will use App
 17. Lastly, configure the `Response` object by clicking on it. Under the `Response body` section, select the text box for the `password` field. Click on the "hamburger" icon and from the `Available inputs` heading, select the `JSON Parser/Parse` drop down and click on the `password` object.
 17. The flow configuration is now complete. Your changes are saved automatically. Click `Done` to return to the dashboard.
 17. You can start up the flow by clicking the "3 dots" icon on the far right side of the screen and then selecting `Start API`
-18. You should now see the API in the `Started`state. You can now run it. App Connect does have a test harness where you can run APIs you create. Within the same view inside of your flow, at the top of the screen you should see two headings `Define` and `Manage`. You created the flow already from within the `Define` section. Click on the `Manage` tab to go into API Management mode.
+18. You should now see the API in the `Started`state. You can now run it. App Connect includes the capability to manage and run APIs you create. Within the same view inside of your flow, at the top of the screen you should see two headings `Define` and `Manage`. You created the flow already from within the `Define` section. Click on the `Manage` tab to go into API Management mode.
 19. From within the manage tab, there are a number of options how you can secure and manage the API you created. For the moment, you can ignore these and scroll all the way to the bottom to the `Sharing Outside of Cloud Foundry organization` heading. Click on the `Create API Key` buttom. Give this key a name. No need to copy and paste this key, as the test tool will automatically use that key when you test it.
 20. Once the key has been created, a link will appear that contains the developer portal for your API. This portal would normally be shared with others who wish to consume the API you just created from within their respetive applications. For today, just click on this link and it will bring you to the portal page where the test client is.
 21. Once you are in the portal, you will see some documentation for your API as well as the ability to export it as OpenAPI 2.0 compliant YAML. For now, simply find the test tool by clicking on the `Try it` on the top right hand part of the portal page.
