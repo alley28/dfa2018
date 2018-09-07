@@ -22,7 +22,7 @@ The password resides in a Cloudant NoSQL Database on IBM Cloud. You will use App
 1. Go to your browser. You should already be authenticated into App Connect
 2. Click on the `Dashboard` header if you aren't already there
 3. Click on `New (+)` and then `Flows for an API`
-4. APIs are model driven using App Connect. A Model is simply a structure for the request/response payload used by the API.  In this case, there is no request body, and the response body is very simple (see Response body section above).
+4. APIs are model driven using App Connect. A Model is simply a structure for the request/response payload used by the API.  In this case, there is no request body since it is a GET, and the response body is very simple, containing just one field which we will create here shortly.
 5. Give the model a name. e.g., `Password`. Click `Create Model` when complete.
 6. You can now add properties to your model. These will be the data elements that make up your model. This model will only have 2 elements. Create the first one and call it `key` and set it to be of type `string`. You will see that the `ID` radio button to this property's immediate right is enabled. This will allow us to map in a URL parameter within our flow to allow us to extract the property item from the database. Create a second property and call it `password` and set it to be of type `string`.
 7. Click on the `Operations` tab. You will now create an operation to call the Password API.
