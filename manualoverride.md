@@ -9,7 +9,7 @@ applies_to: [developer,administrator,consumer]
 ---
 In order to solve this puzzle, you will need to construct a new API in App Connect.  Some hints are below
 
-The password needed to execute the manual override the door is located in another Cloudant NoSQL Database called `manualdooroverridecode`.  **Note** there is only one document in this table, so a filter to extract a specific document is not needed.
+The token needed to execute the manual override the door is located in another Cloudant NoSQL Database called `manualdooroverridecode`.  **Note** there is only one document in this table, so a filter to extract a specific document is not needed.
 
 You will need to construct the token properly in order to open the door.   The token required is a combination of four other tokens resident present in an array inside of a Cloudant DB object.
 
