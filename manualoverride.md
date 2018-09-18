@@ -7,7 +7,7 @@ permalink: /manualoverride.html
 summary: api docs
 applies_to: [developer,administrator,consumer]
 ---
-In order to solve this puzzle, you will need to construct a new API in App Connect.  Some hints are below
+In order to solve this puzzle, you will need to construct a new API in App Connect.  Some hints are below:  
 
 The token needed to execute the manual override the door is located in another Cloudant NoSQL Database called `manualdooroverridecode`.  **Note** there is only one document in this table, so a filter to extract a specific document is not needed.
 
