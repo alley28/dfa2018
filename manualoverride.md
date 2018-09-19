@@ -13,9 +13,9 @@ The token needed to execute the manual override the door is located in another C
 
 You will need to construct the token properly in order to open the door.   The token required is a combination of four other tokens present in an array inside of a Cloudant DB object.
 
-Below is a good reference on functions that might be helpful:  http://docs.jsonata.org/string-functions.html
+Here is a good reference on functions that might be helpful:  http://docs.jsonata.org/string-functions.html
 
-The sample JSON output that contains the array looks as such:
+You can find a sample of the JSON output provided by the Cloudant DB Below.  Hint:  There is `JSON Parse` Operation that can be helpful.
 
 ```
 {
