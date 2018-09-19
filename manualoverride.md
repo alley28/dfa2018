@@ -11,7 +11,7 @@ In order to solve this puzzle, you will need to construct a new API in App Conne
 
 The token needed to execute the manual override the door is located in another Cloudant NoSQL Database called `manualdooroverridecode`.  **Note** there is only one document in this table, so a filter to extract a specific document is not needed.
 
-You will need to construct the token properly in order to open the door.   The token required is a combination of four other tokens resident present in an array inside of a Cloudant DB object.
+You will need to construct the token properly in order to open the door.   The token required is a combination of four other tokens present in an array inside of a Cloudant DB object.
 
 Below is a good reference on functions that might be helpful:  http://docs.jsonata.org/string-functions.html
 
