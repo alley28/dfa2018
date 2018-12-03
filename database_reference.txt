@@ -1,0 +1,7 @@
+There are two main databases used with the solution. These are Cloudant NoSQL Databases
+
+Database 1 is called `vaultdoorpwd`
+
+there is one document called `99ee35dbeb720b24c23341d99e62b310.json`
+
+Database 2 is called `manualdooroverride` and contains one document called 12e43b904ee82d190355b661b70a460c.json
