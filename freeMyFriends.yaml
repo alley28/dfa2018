@@ -1,0 +1,130 @@
+$integration: 'http://ibm.com/appconnect/integration/v2/integrationFile'
+integration:
+  type: api
+  trigger-interfaces:
+    trigger-interface-1:
+      triggers:
+        pwPassword:
+          assembly:
+            $ref: '#/integration/assemblies/assembly-1'
+          input-context:
+            data: password
+          output-context:
+            data: password
+      options:
+        resources:
+          - business-object: password
+            model:
+              $ref: '#/models/password'
+            triggers:
+              pw: pwPassword
+      type: api-trigger
+  action-interfaces:
+    action-interface-1:
+      type: api-action
+      business-object: document
+      connector-type: cloudantdb
+      account-name: Account 1
+      actions:
+        RETRIEVEALL: {}
+  assemblies:
+    assembly-1:
+      assembly:
+        execute:
+          - retrieve-action:
+              name: IBM Cloudant Retrieve documents
+              target:
+                $ref: '#/integration/action-interfaces/action-interface-1'
+              filter:
+                where:
+                  db_name: manualdooroverridecode
+                input: []
+                limit: 10
+              allow-truncation: false
+              pagination-type: SKIP_LIMIT
+              allow-empty-output: true
+          - parse:
+              name: JSON Parser Parse
+              parse-format: json
+              source:
+                template: '{{$IBMCloudantRetrievedocuments.data}}'
+                input:
+                  - variable: IBMCloudantRetrievedocuments
+                    $ref: >-
+                      #/node-output/IBM Cloudant Retrieve
+                      documents/response/payload
+                  - variable: IBMCloudantRetrievedocumentsMetadata
+                    $ref: '#/node-output/IBM Cloudant Retrieve documents/response'
+              sample-data: |-
+                {
+                  "keyset": [
+                    "abcdef",
+                    "ghijkl",
+                    "mnopqr",
+                    "stuvwx"
+                  ]
+                }
+              output-schema:
+                $schema: 'http://json-schema.org/draft-04/schema#'
+                type: object
+                properties:
+                  keyset:
+                    type: array
+                    items:
+                      type: string
+                title: Parsed JSON
+          - response:
+              name: response-1
+              reply-maps:
+                - title: password successfully add custom operation
+                  status-code: '200'
+                  map:
+                    $map: 'http://ibm.com/appconnect/map/v1'
+                    input:
+                      - variable: IBMCloudantRetrievedocuments
+                        $ref: >-
+                          #/node-output/IBM Cloudant Retrieve
+                          documents/response/payload
+                      - variable: IBMCloudantRetrievedocumentsMetadata
+                        $ref: '#/node-output/IBM Cloudant Retrieve documents/response'
+                      - variable: JSONParserParse
+                        $ref: '#/node-output/JSON Parser Parse/response/payload'
+                    mappings:
+                      - password:
+                          template: '{{$join($JSONParserParse.keyset, "-")}}'
+                  input:
+                    - variable: IBMCloudantRetrievedocuments
+                      $ref: >-
+                        #/node-output/IBM Cloudant Retrieve
+                        documents/response/payload
+                    - variable: IBMCloudantRetrievedocumentsMetadata
+                      $ref: '#/node-output/IBM Cloudant Retrieve documents/response'
+                    - variable: JSONParserParse
+                      $ref: '#/node-output/JSON Parser Parse/response/payload'
+  name: freeMyFriends
+models:
+  password:
+    name: password
+    properties:
+      password:
+        required: false
+        id: true
+        type: string
+    plural: password
+    description: ' '
+    operations:
+      pw: '#/integration/assemblies/assembly-1'
+    methods:
+      pw:
+        name: pw
+        display:
+          name: getPW
+        accessType: WRITE
+        accepts: []
+        returns:
+          arg: data
+          type: password
+          root: true
+        http:
+          verb: GET
+          path: /pw

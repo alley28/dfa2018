@@ -1,0 +1,123 @@
+$integration: 'http://ibm.com/appconnect/integration/v2/integrationFile'
+integration:
+  type: api
+  trigger-interfaces:
+    trigger-interface-1:
+      triggers:
+        retrievePassword:
+          assembly:
+            $ref: '#/integration/assemblies/assembly-1'
+          input-context:
+            data: Password
+          output-context:
+            data: Password
+      options:
+        resources:
+          - business-object: Password
+            model:
+              $ref: '#/models/Password'
+            triggers:
+              retrieve: retrievePassword
+      type: api-trigger
+  action-interfaces:
+    action-interface-1:
+      type: api-action
+      business-object: document
+      connector-type: cloudantdb
+      account-name: Account 1
+      actions:
+        RETRIEVEALL: {}
+  assemblies:
+    assembly-1:
+      assembly:
+        execute:
+          - retrieve-action:
+              name: IBM Cloudant Retrieve documents
+              target:
+                $ref: '#/integration/action-interfaces/action-interface-1'
+              filter:
+                where:
+                  and:
+                    - _id: '{{$api.key}}'
+                    - db_name: vaultdoorpwd
+                input:
+                  - variable: api
+                    $ref: '#/trigger/api/parameters'
+                limit: 1
+              allow-truncation: true
+              pagination-type: SKIP_LIMIT
+              allow-empty-output: true
+          - parse:
+              name: JSON Parser Parse
+              parse-format: json
+              source:
+                template: '{{$IBMCloudantRetrievedocuments.data}}'
+                input:
+                  - variable: api
+                    $ref: '#/trigger/api/parameters'
+                  - variable: IBMCloudantRetrievedocuments
+                    $ref: >-
+                      #/node-output/IBM Cloudant Retrieve
+                      documents/response/payload
+                  - variable: IBMCloudantRetrievedocumentsMetadata
+                    $ref: '#/node-output/IBM Cloudant Retrieve documents/response'
+              sample-data: |-
+                {
+                 "password": "somepassword"
+                }
+              output-schema:
+                $schema: 'http://json-schema.org/draft-04/schema#'
+                type: object
+                properties:
+                  password:
+                    type: string
+                title: Parsed JSON
+          - response:
+              name: response-1
+              reply-maps:
+                - title: Password successfully retrieved
+                  status-code: '200'
+                  map:
+                    $map: 'http://ibm.com/appconnect/map/v1'
+                    input:
+                      - variable: api
+                        $ref: '#/trigger/api/parameters'
+                      - variable: IBMCloudantRetrievedocuments
+                        $ref: >-
+                          #/node-output/IBM Cloudant Retrieve
+                          documents/response/payload
+                      - variable: IBMCloudantRetrievedocumentsMetadata
+                        $ref: '#/node-output/IBM Cloudant Retrieve documents/response'
+                      - variable: JSONParserParse
+                        $ref: '#/node-output/JSON Parser Parse/response/payload'
+                    mappings:
+                      - password:
+                          template: '{{$JSONParserParse.password}}'
+                  input:
+                    - variable: api
+                      $ref: '#/trigger/api/parameters'
+                    - variable: IBMCloudantRetrievedocuments
+                      $ref: >-
+                        #/node-output/IBM Cloudant Retrieve
+                        documents/response/payload
+                    - variable: IBMCloudantRetrievedocumentsMetadata
+                      $ref: '#/node-output/IBM Cloudant Retrieve documents/response'
+                    - variable: JSONParserParse
+                      $ref: '#/node-output/JSON Parser Parse/response/payload'
+  name: getNewPW
+models:
+  Password:
+    name: Password
+    properties:
+      key:
+        required: false
+        id: true
+        type: string
+      password:
+        required: false
+        id: false
+        type: string
+    plural: Password
+    description: ' '
+    operations:
+      retrieve: '#/integration/assemblies/assembly-1'
